@@ -1,24 +1,34 @@
 package mx.com.liverpool.application.ports.input;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import lombok.RequiredArgsConstructor;
 import mx.com.liverpool.application.generic.ServiceApplication;
+import mx.com.liverpool.application.ports.output.PersonManagementOutputPort;
 import mx.com.liverpool.application.usecases.PersonManagementUseCase;
 import mx.com.liverpool.domain.PersonDO;
 
 @ServiceApplication
+@RequiredArgsConstructor
 public class PersonManagementInputPort implements PersonManagementUseCase {
+
+  private final PersonManagementOutputPort outputPort;
+  private static final Logger log = LoggerFactory.getLogger(PersonManagementInputPort.class);
 
   @Override
   public PersonDO savePerson(PersonDO person) {
-    return null;
+    log.info("Request to save person: {}", person);
+    return outputPort.save(person);
   }
 
   @Override
   public PersonDO getById(String id) {
-    return null;
+    return outputPort.getById(id);
   }
 
   @Override
   public void deletePerson(String id) {
-
+    outputPort.delete(id);
   }
 }
