@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.mx.liverpool.grpc";
+option java_outer_classname = "PersonStubs";
+
+package com.mx.liverpool.grpc;
+
+service PersonService {
+  rpc calculateAge(PersonDetailsRequest) returns (PersonDetailsResponse);
+}
+
+message PersonDetailsResponse {
+  int32 age = 1;
+  string state = 2;
+}
+
+message PersonDetailsRequest {
+  string name = 1;
+}
